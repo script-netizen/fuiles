@@ -1,0 +1,647 @@
+<html><head><base href="https://totally-real-roblox.example.com">
+<meta charset="UTF-8">
+<title>🤑 FREE ROBUX + FREE VBUCKS + FREE MINECOINS 100000% REAL NO FAKE</title>
+<style>
+  * {
+    font-family: 'Comic Sans MS', cursive !important;
+    border: 3px solid transparent;
+    animation: rainbowBorder 1s infinite linear !important;
+  }
+
+  body {
+    background: linear-gradient(45deg, #ff0000, #ff00ff, #00ff00, #ffff00, #00ffff);
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-size: 400% 400%;
+    animation: gradientBG 3s ease infinite;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext x='0' y='20' font-size='20'%3E💰%3C/text%3E%3C/svg%3E"), auto !important;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 220px !important;
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    animation: bounce 0.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .blink {
+    animation: blink 0.1s infinite;
+    font-size: 72px;
+    color: #ff0000;
+    text-shadow: 5px 5px #ff00ff, -5px -5px #00ff00;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0; transform: scale(2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .button {
+    background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff);
+    border: 10px solid gold;
+    padding: 40px 80px;
+    font-size: 48px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 20px;
+    animation: shake 0.1s infinite;
+  }
+
+  @keyframes shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-15px, 15px) rotate(-10deg); }
+    75% { transform: translate(15px, -15px) rotate(10deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  marquee {
+    font-size: 36px;
+    color: yellow;
+    background: red;
+    padding: 20px;
+  }
+
+  .process-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 40px;
+    background: #333;
+    border: 5px solid lime;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #00ff00);
+    background-size: 200% 100%;
+    animation: gradientMove 2s linear infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  .status-text {
+    font-size: 24px;
+    margin: 10px 0;
+    text-shadow: 0 0 10px #00ff00;
+  }
+
+  .hacking-animation {
+    font-size: 14px;
+    text-align: left;
+    height: 200px;
+    overflow: hidden;
+    margin: 20px 0;
+    padding: 10px;
+    background: #000;
+    border: 2px solid #00ff00;
+  }
+
+  @keyframes emojiRain {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); }
+  }
+
+  .emoji-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  input, select {
+    animation: wobble 0.5s infinite ease-in-out !important;
+  }
+
+  @keyframes wobble {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(5deg) scale(1.1); }
+    75% { transform: rotate(-5deg) scale(0.9); }
+    100% { transform: rotate(0deg) scale(1); }
+  }
+
+  @keyframes rainbowBorder {
+    0% { border-color: red; }
+    33% { border-color: lime; }
+    66% { border-color: blue; }
+    100% { border-color: red; }
+  }
+
+  .quiz-container {
+    max-height: 50vh; /* Reduce height to leave room for button */
+    overflow-y: auto;
+    padding: 20px;
+    border: 5px solid #ff00ff;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.9);
+    margin: 20px 0; /* Adjust margins */
+  }
+
+  .quiz-container::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  .quiz-container::-webkit-scrollbar-track {
+    background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+  }
+
+  .quiz-container::-webkit-scrollbar-thumb {
+    background: gold;
+    border-radius: 10px;
+    border: 3px solid #ff00ff;
+  }
+
+  .survey-wrapper {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background: white;
+  }
+
+  /* Add new CSS for side ads */
+  .side-ads {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .side-ads::-webkit-scrollbar {
+    width: 10px;
+    background: rainbow;
+  }
+
+  .side-ads.left {
+    left: 0;
+  }
+
+  .side-ads.right {
+    right: 0;
+  }
+
+  .fake-ad {
+    background: white;
+    padding: 10px;
+    border: 3px solid red;
+    border-radius: 10px;
+    text-align: center;
+    animation: flashingBorder 0.5s infinite;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .fake-ad:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px yellow;
+  }
+
+  @keyframes flashingBorder {
+    0% { border-color: red; }
+    50% { border-color: yellow; }
+    100% { border-color: red; }
+  }
+
+  @keyframes popupBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+</style>
+</head>
+<body>
+  <div class="emoji-rain"></div>
+  <div class="side-ads left">
+    <div class="fake-ad">
+      🔥HOT SINGLES IN YOUR AREA🔥
+      <br>CLICK NOW!!!<br>
+      <span style="font-size: 8px">totally not a virus</span>
+    </div>
+    
+    <div class="fake-ad">
+      💊 DOCTORS HATE THIS ONE TRICK!
+      <br>GROW 10 FEET TALLER!
+    </div>
+    
+    <div class="fake-ad">
+      🎰 YOU'RE THE 1,000,000TH VISITOR!
+      <br>CLAIM YOUR PRIZE NOW!
+    </div>
+
+    <div class="fake-ad" dir="rtl" lang="ar">
+      مرحباً! اربح المال مجاناً! انقر هنا!
+      <br>💰💰💰
+    </div>
+  </div>
+
+  <div class="side-ads right">
+    <div class="fake-ad">
+      🎮 FREE MINECRAFT PREMIUM!
+      <br>NO SCAM! REAL 2025!
+    </div>
+    
+    <div class="fake-ad">
+      📱 WIN A FREE iPHONE 15!
+      <br>JUST ENTER YOUR CREDIT CARD!
+    </div>
+    
+    <div class="fake-ad" dir="rtl" lang="ar">
+      روبلوكس مجاني! احصل عليه الآن!
+      <br>✨✨✨
+    </div>
+
+    <div class="fake-ad">
+      🚗 LOCAL MOM FOUND A WAY TO GET
+      <br>FREE TESLA! CLICK HERE!
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="blink">🤑💎🎮 FREE ROBUX + VBUCKS + MINECOINS GENERATOR 1000000% REAL!!! 🎮💎🤑</h1>
+    
+    <div style="font-size: 24px; color: purple; margin: 20px;" dir="rtl" lang="ar">
+      عرض محدود! احصل على روبكس مجاني الآن! لا تفوت هذه الفرصة الرائعة! انقر هنا للفوز!
+      <br>🎮✨💎💰
+    </div>
+
+    <marquee scrollamount="30" behavior="alternate">🎮 FREE EVERYTHING! ENDORSED BY BILL GATES AND ELON MUSK! WORKING 2025! NO SCAM! PINKY PROMISE! 🎮</marquee>
+
+    <div style="margin: 20px;">
+      <img alt="extremely poorly edited collage of robux, vbucks, and minecoins with rainbow effects and comic sans text saying REAL" src="fake-currency.jpg" width="400" height="400">
+    </div>
+
+    <h2 style="color: #ff0000; font-size: 48px; text-shadow: 3px 3px lime;">👇 CLICK BUTTON FOR INSTANT RICHES! 👇</h2>
+    
+    <div>
+      <input type="text" placeholder="ROBLOX/FORTNITE/MINECRAFT USERNAME" style="padding: 20px; font-size: 30px; margin: 10px; width: 80%; background: yellow;">
+      <br>
+      <input type="password" placeholder="PASSWORD (WE PROMISE NOT TO STEAL IT)" style="padding: 20px; font-size: 30px; margin: 10px; width: 80%; background: lime;">
+      <br>
+      <select style="padding: 20px; font-size: 30px; margin: 10px; width: 80%; background: pink;">
+        <option>💎 SELECT YOUR FREE STUFF!!! 💎</option>
+        <option>🤑 999,999,999 ROBUX + FREE IPHONE 15 PRO MAX</option>
+        <option>🤑 999,999,999 VBUCKS + FREE TESLA MODEL X</option>
+        <option>🤑 999,999,999 MINECOINS + FREE PRIVATE ISLAND</option>
+        <option>🤑 ALL OF THE ABOVE + FREE MANSION!!!</option>
+      </select>
+    </div>
+
+    <button class="button" onclick="startSuperScam()">🎁 CLAIM YOUR FREE STUFF NOW!!! 🎁</button>
+
+    <div style="font-size: 8px; color: #666;">
+      *By clicking this button you agree to give us your soul and your parent's entire life savings
+    </div>
+  </div>
+
+  <div class="process-overlay" id="hackingOverlay">
+    <h1 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">🦠 SUPER MEGA HACKING IN PROGRESS 🦠</h1>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+    
+    <div class="status-text" id="statusText">Initializing super secret hacking sequence...</div>
+    
+    <div class="hacking-animation" id="hackingText"></div>
+  </div>
+
+<script>
+function showBluescreen() {
+  document.body.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #0078d7;
+      color: white;
+      padding: 50px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 24px;
+      z-index: 999999;
+    ">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h1>):  Your PC ran into a problem</h1>
+        <p>Error code: SCAMMED_LOL_0x000000EF</p>
+        <p style="margin-top: 30px;">
+          A problem has been detected and Windows has been shut down to prevent damage to your computer.
+        </p>
+        <p>
+          MULTIPLE_POPUP_OVERFLOW_EXCEPTION
+        </p>
+        <p>
+          If this is the first time you've seen this stop error screen, congratulations! You've been thoroughly pranked.
+          This is what happens when you try to get free Robux. ¯\\_(ツ)_/¯
+        </p>
+        <div style="margin-top: 50px;">
+          For more information about this issue and possible fixes:
+          <br>• Just kidding, your computer is fine
+          <br>• This is a fake bluescreen
+          <br>• Don't trust sketchy websites!
+          <br>• Technical information: GET-PRANKED-LOL
+        </div>
+        <div style="margin-top: 50px; text-align: center;">
+          Collecting error info: 100% complete
+          <br>You can close this tab now :)
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function spawnEndlessPopups() {
+  let count = 1;
+  let totalPopups = 0;
+  
+  function createFakePopup() {
+    const messages = [
+      "🎉 YOU WON!!!",
+      "💰 CLAIM YOUR PRIZE NOW!",
+      "⚠️ YOUR COMPUTER HAS VIRUS!",
+      "🎮 FREE ROBUX HERE!",
+      "💎 CLICK FOR VBUCKS!",
+      "🏆 CONGRATULATIONS!",
+      "⚡ SYSTEM ALERT!",
+      "🔥 HOT SINGLES DETECTED!",
+      "💻 DOWNLOAD MORE RAM!",
+      "🎁 FREE GIFT WAITING!"
+    ];
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      position: fixed;
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(45deg, #ff0000, #00ff00);
+      border: 5px solid yellow;
+      border-radius: 10px;
+      z-index: 9999;
+      left: ${Math.random() * (window.innerWidth - 300)}px;
+      top: ${Math.random() * (window.innerHeight - 200)}px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      cursor: pointer;
+      animation: popupBounce 0.5s infinite;
+      font-family: 'Comic Sans MS';
+      text-align: center;
+    `;
+    
+    popup.innerHTML = `
+      <h1 style="color: yellow; text-shadow: 2px 2px red; font-size: 24px;">
+        ${messages[Math.floor(Math.random() * messages.length)]}
+      </h1>
+    `;
+    
+    document.body.appendChild(popup);
+    
+    totalPopups++;
+    if (totalPopups >= 100) {
+      showBluescreen();
+      return; // Stop creating more popups
+    }
+    
+    // Make popup clickable to spawn more
+    popup.onclick = spawnEndlessPopups;
+    
+    // Clean up old popups if there are too many
+    const allPopups = document.querySelectorAll('[data-fake-popup]');
+    if (allPopups.length > 50) {
+      allPopups[0].remove();
+    }
+  }
+
+  // Create multiple popups with more aggressive exponential growth
+  for (let i = 0; i < count; i++) {
+    setTimeout(createFakePopup, i * 50);
+  }
+  count *= 4; // Changed from count *= 2 to count *= 4 for faster exponential growth
+  
+  if (count < 128 && totalPopups < 100) { // Check total popups
+    setTimeout(spawnEndlessPopups, 250); // Reduced delay between waves from 500ms to 250ms
+  }
+}
+
+document.querySelectorAll('.fake-ad').forEach(ad => {
+  ad.onclick = spawnEndlessPopups;
+});
+
+function startSuperScam() {
+  const overlay = document.getElementById('hackingOverlay');
+  const progressBar = document.getElementById('progressBar');
+  const statusText = document.getElementById('statusText');
+  const hackingText = document.getElementById('hackingText');
+  overlay.style.display = 'block';
+  
+  const statuses = [
+    "BYPASSING FBI SECURITY...",
+    "HACKING THE MAINFRAME...",
+    "DOWNLOADING MORE RAM...",
+    "INJECTING ROBUX INTO THE BLOCKCHAIN...",
+    "STEALING YOUR PARENT'S CREDIT CARD INFO...",
+    "CALLING BILL GATES FOR PERMISSION...",
+    "MINING BITCOIN WITH YOUR COMPUTER...",
+    "DELETING SYSTEM32 FOR MORE SPACE...",
+    "UPGRADING YOUR INTERNET TO WEB 4.0...",
+    "CONNECTING TO SECRET ROBLOX SERVERS...",
+    "GENERATING FREE ITEMS...",
+    "ALMOST DONE! DO NOT CLOSE THIS WINDOW..."
+  ];
+
+  let progress = 0;
+  let statusIndex = 0;
+  
+  const hackingLines = [
+    "ACCESS MAINFRAME...",
+    "BYPASS SECURITY...",
+    "INJECT CODE...",
+    "STEAL DATA...",
+    "DELETE EVIDENCE..."
+  ];
+  
+  const updateHackingText = () => {
+    const randomLine = hackingLines[Math.floor(Math.random() * hackingLines.length)];
+    hackingText.innerHTML += randomLine + "<br>";
+    hackingText.scrollTop = hackingText.scrollHeight;
+    
+    if (hackingText.children.length > 20) {
+      hackingText.innerHTML = hackingText.innerHTML.split('<br>').slice(-20).join('<br>');
+    }
+  };
+
+  const interval = setInterval(() => {
+    progress += Math.random() * 2;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      setTimeout(() => {
+        overlay.innerHTML = `
+          <div class="survey-wrapper">
+            <h1 style="color: #ff0000;">🎉 ALMOST THERE! 🎉</h1>
+            <h2 style="color: #00ff00;">Just complete this quick survey to verify you're human!</h2>
+            <div class="quiz-container" style="text-align: left; font-size: 24px;">
+              <p>1. How many Robux do you want?</p>
+              <input type="radio"> 999,999,999 Robux<br>
+              <input type="radio"> 999,999,998 Robux<br>
+              <input type="radio"> All of them!!!<br>
+              
+              <p>2. What is your favorite color?</p>
+              <input type="radio"> Money Green<br>
+              <input type="radio"> Robux Orange<br>
+              <input type="radio"> Free Stuff Rainbow<br>
+              
+              <p>3. How epic are you?</p>
+              <input type="radio"> Super Epic<br>
+              <input type="radio"> Mega Epic<br>
+              <input type="radio"> Ultra Epic Pro Gamer<br>
+              
+              <p>4. Do you promise to tell all your friends about this?</p>
+              <input type="radio"> Yes!!!<br>
+              <input type="radio"> DEFINITELY YES!!!<br>
+              <input type="radio"> OMG YES!!!<br>
+            </div>
+            <button class="button" onclick="showScamMessage()" style="font-size: 24px; padding: 20px; margin-top: 20px;">
+              🎁 SUBMIT AND GET YOUR FREE STUFF! 🎁
+            </button>
+          </div>
+        `;
+      }, 1000);
+    }
+    
+    progressBar.style.width = progress + '%';
+    
+    if (progress > (statusIndex + 1) * (100 / statuses.length)) {
+      statusText.innerText = statuses[Math.min(statusIndex, statuses.length - 1)];
+      statusIndex++;
+    }
+    
+    updateHackingText();
+  }, 100);
+}
+
+function createEmojiRain() {
+  const emojis = '🤑💰💎🎮🎁';
+  const rainContainer = document.createElement('div');
+  rainContainer.className = 'emoji-rain';
+  document.body.appendChild(rainContainer);
+  
+  setInterval(() => {
+    const emoji = document.createElement('div');
+    emoji.style.position = 'fixed';
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.fontSize = (Math.random() * 30 + 20) + 'px';
+    emoji.style.animation = 'emojiRain ' + (Math.random() * 2 + 2) + 's linear forwards';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    rainContainer.appendChild(emoji);
+    
+    setTimeout(() => emoji.remove(), 4000);
+  }, 100);
+}
+
+createEmojiRain();
+
+function showScamMessage() {
+  document.body.innerHTML = `
+    <div style="background: black; min-height: 100vh; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1 style="color: red; font-size: 120px; text-align: center; animation: warning 0.5s infinite;">⚠️ GET SCAMMED LOL ⚠️</h1>
+      <div style="background: red; padding: 40px; border-radius: 20px; max-width: 800px; margin: 20px; animation: shake 0.1s infinite;">
+        <h2 style="color: yellow; font-size: 48px; text-align: center;">🤡 CONGRATULATIONS! YOU JUST:</h2>
+        <ul style="color: white; font-size: 36px; line-height: 1.5;">
+          <li>Gave away your password! 🔑</li>
+          <li>Downloaded 17 viruses! 🦠</li>
+          <li>Installed 42 toolbars! 🛠️</li>
+          <li>Gave us control of your webcam! 📸</li>
+          <li>Subscribed to 97 spam email lists! 📧</li>
+          <li>Downloaded more RAM! (jk that's impossible) 💾</li>
+        </ul>
+      </div>
+
+      <div style="background: #00ff00; padding: 40px; border-radius: 20px; max-width: 800px; margin: 20px; animation: bounce 0.5s infinite;">
+        <h2 style="color: black; font-size: 48px; text-align: center;">🎓 LESSON LEARNED:</h2>
+        <p style="color: black; font-size: 36px; text-align: center;">
+          There's no such thing as free Robux, V-Bucks, or Minecoins!<br>
+          Never give your password to strangers!<br>
+          Don't trust sketchy websites!<br>
+          Tell your parents what happened!
+        </p>
+      </div>
+
+      <marquee scrollamount="30" behavior="alternate" style="width: 100%; background: yellow;">
+        <span style="font-size: 48px; color: red;">🤡 YOU JUST GOT PRANKED! 🤡 BETTER LUCK NEXT TIME! 🤡 THANKS FOR THE PASSWORD! 🤡</span>
+      </marquee>
+    </div>
+  `;
+
+  const audio = new Audio('data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU='); 
+  
+  function beepLoop() {
+    audio.play();
+    setTimeout(beepLoop, 500);
+  }
+  beepLoop();
+
+  setInterval(() => {
+    console.log("GET SCAMMED LOL");
+    console.error("YOUR COMPUTER IS NOW OURS");
+    console.warn("THANKS FOR THE PASSWORD!");
+  }, 100);
+
+  setInterval(() => {
+    window.alert("GET SCAMMED LOL! 🤡");
+  }, 2000);
+}
+
+window.onbeforeunload = function() {
+  return "WAIT! DON'T LEAVE! YOU'RE THE LUCKY WINNER OF A FREE MANSION AND YACHT! CLICK CANCEL TO CLAIM NOW!";
+};
+
+setInterval(() => {
+  document.title = document.title === "🤑 FREE STUFF!!!" ? "👆 CLICK NOW!!!" : "🤑 FREE STUFF!!!";
+}, 100);
+</script>
+
+</body></html>

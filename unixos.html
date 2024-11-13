@@ -1,0 +1,505 @@
+<html><head><base href=".">
+<meta charset="UTF-8">
+<title>UniX</title>
+<style>
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #000000;
+        color: #00ffcc;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .desktop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('assets/unixbg.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
+    .taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        gap: 10px;
+    }
+    .taskbar-item {
+        padding: 5px 15px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .taskbar-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    .time-display {
+        color: #00ffcc;
+        padding: 5px 15px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+    .menu-wrapper {
+        position: absolute;
+        bottom: 40px;
+        left: 10px;
+        background: rgba(0,0,0,0.9);
+        padding: 20px;
+        border-radius: 0px;
+        border: 2px solid #00ffcc;
+        color: #00ffcc;
+        width: 300px; 
+    }
+    .search-bar {
+        width: calc(100% - 20px);
+        margin: 0 0 15px 0;
+        padding: 8px 10px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid #00ffcc;
+        color: #00ffcc;
+        outline: none;
+    }
+    .search-bar::placeholder {
+        color: rgba(0, 255, 204, 0.5);
+    }
+    .menu-apps {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    .app-item {
+        position: relative;
+        padding: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        width: 60px;
+    }
+    .app-icon {
+        font-size: 24px; 
+    }
+    .app-name {
+        font-size: 11px; 
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.2;
+        padding: 0 2px;
+    }
+    .app-item:hover .app-name::after {
+        content: attr(data-fullname);
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.9);
+        padding: 5px 10px;
+        border: 1px solid #00ffcc;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+    .pin-btn {
+        background: none;
+        border: none;
+        color: #00ffcc;
+        cursor: pointer;
+        padding: 2px 5px;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .app-item:hover .pin-btn {
+        opacity: 1;
+    }
+    .customize-wrapper {
+        background: rgba(0,0,0,0.9);
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #00ffcc;
+        color: #00ffcc;
+        width: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .customize-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .close-btn {
+        background: none;
+        border: none;
+        color: #00ffcc;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .section {
+        margin-bottom: 20px;
+    }
+    .option {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .terminal-wrapper {
+        background: rgba(0,0,0,0.9);
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #00ffcc;
+        color: #00ffcc;
+        width: 600px;
+        height: 500px; 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;  
+        flex-direction: column; 
+    }
+    .terminal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-shrink: 0; 
+    }
+    .window-controls {
+        display: flex;
+        gap: 10px;
+    }
+    .fullscreen-btn {
+        background: none;
+        border: none;
+        color: #00ffcc;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .proxy-wrapper .terminal-iframe {
+        height: 600px;
+    }
+    .patchnotes-content {
+        padding: 20px;
+        overflow-y: auto;
+        height: calc(100% - 80px);
+    }
+    .patchnotes-content h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .patchnotes-content h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .patchnotes-content ul {
+        margin-bottom: 20px;
+    }
+    .patchnotes-content li {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+    <div class="desktop" id="desktop">
+        <div class="taskbar">
+            <div style="display: flex; gap: 10px;">
+                <div class="taskbar-item" onclick="toggleView('menu')">Menu</div>
+                <div id="pinned-apps" style="display: flex; gap: 10px;"></div>
+            </div>
+            <div class="time-display" id="timeDisplay"></div>
+        </div>
+        <div id="menu-container" style="display: none;">
+            <div class="menu-wrapper">
+                <input type="text" class="search-bar" placeholder="Search apps..." onkeyup="searchApps(this.value)">
+                <div class="menu-apps">
+                    <div class="app-item" data-app="customize">
+                        <span class="app-icon">⚙️</span>
+                        <span class="app-name" data-fullname="Customize">Customize</span>
+                        <button class="pin-btn" onclick="togglePin('customize', '⚙️', 'Customize')">📌</button>
+                    </div>
+                    <div class="app-item" data-app="terminal">
+                        <span class="app-icon">💻</span>
+                        <span class="app-name" data-fullname="Terminal">Terminal</span>
+                        <button class="pin-btn" onclick="togglePin('terminal', '💻', 'Terminal')">📌</button>
+                    </div>
+                    <div class="app-item" data-app="towerdefense">
+                        <span class="app-icon">🎮</span>
+                        <span class="app-name" data-fullname="Tower Defense">Tower Defense</span>
+                        <button class="pin-btn" onclick="togglePin('towerdefense', '🎮', 'Tower Defense')">📌</button>
+                    </div>
+                    <div class="app-item" data-app="ai">
+                        <span class="app-icon">🤖</span>
+                        <span class="app-name" data-fullname="AI">AI</span>
+                        <button class="pin-btn" onclick="togglePin('ai', '🤖', 'AI')">📌</button>
+                    </div>
+                    <div class="app-item" data-app="proxy">
+                        <span class="app-icon">🔒</span>
+                        <span class="app-name" data-fullname="Proxy">Proxy</span>
+                        <button class="pin-btn" onclick="togglePin('proxy', '🔒', 'Proxy')">📌</button>
+                    </div>
+                    <div class="app-item" data-app="patchnotes">
+                        <span class="app-icon">📝</span>
+                        <span class="app-name" data-fullname="Patch Notes">Patch Notes</span>
+                        <button class="pin-btn" onclick="togglePin('patchnotes', '📝', 'Patch Notes')">📌</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="customize-container" style="display: none;">
+            <div class="customize-wrapper">
+                <div class="customize-header">
+                    <h2>Customize</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('customize-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <div class="customize-sections">
+                    <div class="section">
+                        <h3>Desktop</h3>
+                        <div class="option">
+                            <label>Background:</label>
+                            <input type="file" id="bg-upload" accept="image/*" onchange="updateBackground(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="terminal-container" style="display: none;">
+            <div class="terminal-wrapper">
+                <div class="terminal-header">
+                    <h2>Terminal</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('terminal-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <iframe src="unixterminal.html" class="terminal-iframe"></iframe>
+            </div>
+        </div>
+        <div id="towerdefense-container" style="display: none;">
+            <div class="terminal-wrapper towerdefense-wrapper">
+                <div class="terminal-header">
+                    <h2>Tower Defense</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('towerdefense-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <iframe src="evotd.html" class="terminal-iframe"></iframe>
+            </div>
+        </div>
+        <div id="ai-container" style="display: none;">
+            <div class="terminal-wrapper ai-wrapper">
+                <div class="terminal-header">
+                    <h2>AI</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('ai-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <iframe src="https://sdk.vercel.ai/playground" class="terminal-iframe"></iframe>
+            </div>
+        </div>
+        <div id="proxy-container" style="display: none;">
+            <div class="terminal-wrapper proxy-wrapper">
+                <div class="terminal-header">
+                    <h2>Proxy</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('proxy-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <iframe src="https://fastfood.subsoniclabs.com/worksheets/index.html" class="terminal-iframe"></iframe>
+            </div>
+        </div>
+        <div id="patchnotes-container" style="display: none;">
+            <div class="terminal-wrapper patchnotes-wrapper">
+                <div class="terminal-header">
+                    <h2>Patch Notes</h2>
+                    <div class="window-controls">
+                        <button onclick="toggleFullscreen('patchnotes-wrapper')" class="fullscreen-btn">⛶</button>
+                        <button onclick="toggleView('desktop')" class="close-btn">×</button>
+                    </div>
+                </div>
+                <div class="patchnotes-content">
+                    <h1>UniX OS Patch Notes</h1>
+                    <h2>Version 1.0.1</h2>
+                    <ul>
+                        <li>Added Patch Notes app</li>
+                        <li>Increased height of Proxy iframe</li>
+                        <li>Fixed issue with duplicate pinnedApps declaration</li>
+                        <li>Improved app window creation process</li>
+                    </ul>
+                    <h2>Version 1.0.0</h2>  
+                    <ul>
+                        <li>Initial release of UniX OS</li>
+                        <li>Implemented basic desktop environment with taskbar and menu</li>
+                        <li>Added Terminal, Tower Defense, AI, and Proxy apps</li>
+                        <li>Enabled app pinning and search functionality</li>
+                        <li>Introduced desktop customization options</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#desktop').show();
+        initializeAppClickHandlers();
+        updateTime(); // Initial time display
+        setInterval(updateTime, 1000); // Update every second
+    });
+
+    const pinnedApps = new Set();
+
+    function togglePin(appId, icon, name) {
+        if (pinnedApps.has(appId)) {
+            pinnedApps.delete(appId);
+            $(`#pinned-${appId}`).remove();
+        } else {
+            pinnedApps.add(appId);
+            $('#pinned-apps').append(`
+                <div class="taskbar-item" id="pinned-${appId}" onclick="toggleView('${appId}')">
+                    ${icon} ${name}
+                </div>
+            `);
+        }
+        $('#menu-container').hide();
+    }
+
+    function initializeAppClickHandlers() {
+        $('.app-item').on('click', function(e) {
+            if (!$(e.target).hasClass('pin-btn')) {
+                const appId = $(this).data('app');
+                toggleView(appId);
+                $('#menu-container').hide();
+            }
+        });
+    }
+
+    function toggleView(view) {
+        if (view === 'menu') {
+            const menuContainer = $('#menu-container');
+            menuContainer.toggle();
+            return;
+        }
+        
+        $('#menu-container, #customize-container, #terminal-container, #towerdefense-container, #ai-container, #proxy-container, #patchnotes-container').hide();
+        if (view === 'customize') {
+            $('#customize-container').show();
+        } else if (view === 'terminal') {
+            $('#terminal-container').show();
+        } else if (view === 'towerdefense') {
+            $('#towerdefense-container').show();
+        } else if (view === 'ai') {
+            $('#ai-container').show();
+        } else if (view === 'proxy') {
+            $('#proxy-container').show();
+        } else if (view === 'patchnotes') {
+            $('#patchnotes-container').show();
+        }
+    }
+
+    function searchApps(query) {
+        query = query.toLowerCase();
+        const appItems = document.querySelectorAll('.app-item');
+        
+        appItems.forEach(item => {
+            const appName = item.querySelector('.app-name').textContent.toLowerCase();
+            if (appName.includes(query)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function updateBackground(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('.desktop').css('background-image', `url(${e.target.result})`);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function updateTime() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString();
+        const dateStr = now.toLocaleDateString();
+        document.getElementById('timeDisplay').textContent = `${dateStr} ${timeStr}`;
+    }
+
+    function toggleFullscreen(elementClass) {
+        const element = document.querySelector(`.${elementClass}`);
+        const container = element.parentElement;
+        const iframe = element.querySelector('.terminal-iframe');
+        
+        if (!element.classList.contains('fullscreen')) {
+            element.classList.add('fullscreen');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100vw';
+            container.style.height = '100vh';
+            container.style.transform = 'none';
+            
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.maxWidth = '100vw';
+            element.style.maxHeight = '100vh';
+            element.style.borderRadius = '0';
+            element.style.padding = '20px';
+            
+            if (iframe) {
+                iframe.style.height = 'calc(100vh - 60px)';
+            }
+        } else {
+            element.classList.remove('fullscreen');
+            container.style.position = 'absolute';
+            container.style.top = '50%';
+            container.style.left = '50%';
+            container.style.width = 'auto';
+            container.style.height = 'auto';
+            container.style.transform = 'translate(-50%, -50%)';
+            
+            element.style.width = '600px';
+            element.style.height = '500px';
+            element.style.maxWidth = '';
+            element.style.maxHeight = '';
+            element.style.borderRadius = '10px';
+            element.style.padding = '20px';
+            element.style.border = '2px solid #00ffcc';
+            
+            if (iframe) {
+                iframe.style.height = '';
+            }
+        }
+    }
+
+    </script>
+</body></html>

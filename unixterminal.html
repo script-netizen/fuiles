@@ -1,0 +1,485 @@
+<html><head><base href=".">
+<meta charset="UTF-8">
+<title>UniX</title>
+<style>
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #000000;
+        color: #00ffcc;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .terminal {
+        padding: 20px;
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+    .output {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 20px;
+    }
+    .input-line {
+        display: flex;
+        background: rgba(0, 255, 204, 0.05);
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+        transition: all 0.3s ease;
+    }
+    .input-line:focus-within {
+        background: rgba(0, 255, 204, 0.1);
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+    }
+    .prompt {
+        margin-right: 10px;
+        opacity: 0.8;
+    }
+    input[type="text"] {
+        background: none;
+        border: none;
+        outline: none;
+        color: #00ffcc;
+        flex: 1;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1em;
+        padding: 0;
+    }
+    input[type="text"]::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    a {
+        color: #00ffcc;
+        text-decoration: none;
+    }
+    .logo-svg {
+        width: 80px;
+        height: 80px;
+        margin: 10px auto;
+        display: block;
+    }
+    @keyframes rainbow {
+        0% { color: #ff0000; }
+        20% { color: #ffff00; }
+        40% { color: #00ff00; }
+        60% { color: #00ffcc; }
+        80% { color: #0000ff; }
+        100% { color: #ff00ff; }
+    }
+    .rainbow-mode {
+        animation: rainbow 5s linear infinite;
+    }
+    .tetris-wrapper {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        background: rgba(0,0,0,0.8);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .tetris-guide {
+        color: #00ffcc;
+        width: 200px;
+        font-family: 'Courier New', monospace;
+        line-height: 1.5;
+    }
+    .coffee-progress {
+        margin: 10px 0;
+        background: #111;
+        border-radius: 4px;
+        overflow: hidden;
+        width: 200px;
+    }
+    .coffee-progress div {
+        width: 0%;
+        height: 20px;
+        background: #00ffcc;
+        transition: width 3s linear;
+    }
+    @keyframes discoGlow {
+        0% { filter: drop-shadow(0 0 5px #ff0000); }
+        20% { filter: drop-shadow(0 0 5px #00ff00); }
+        40% { filter: drop-shadow(0 0 5px #0000ff); }
+        60% { filter: drop-shadow(0 0 5px #ffff00); }
+        80% { filter: drop-shadow(0 0 5px #ff00ff); }
+        100% { filter: drop-shadow(0 0 5px #ff0000); }
+    }
+    @keyframes shineRotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="output" id="output">
+            <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <text x="50%" y="50%" text-anchor="middle" fill="#00ffcc" font-size="40" font-family="Brush Script MT, cursive" dy=".3em">UX</text>
+            </svg>
+            <div id="welcome-message">Welcome to UniX Terminal. Type "help" to get started.</div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">&gt;</span>
+            <input type="text" id="command-input" autocomplete="off" autofocus>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        window.uwuMode = false;
+        window.lastCommand = null;
+        window.rainbowMode = false;
+
+        $('#command-input').keypress(function(e){
+            if(e.which == 13){
+                let cmd = $(this).val().trim();
+                if(cmd) {
+                    $('#output').append('<div>&gt; ' + cmd + '</div>');
+                    processCommand(cmd);
+                    $(this).val('');
+                    $('#output').scrollTop($('#output')[0].scrollHeight);
+                }
+            }
+        });
+
+        function uwuify(text) {
+            if (!window.uwuMode) return text;
+            return text.replace(/[lr]/gi, function(match) {
+                return match.toLowerCase() === match ? 'w' : 'W';
+            });
+        }
+
+        function processCommand(cmd){
+            if (cmd !== '!!') {
+                window.lastCommand = cmd;
+            }
+
+            let parts = cmd.split(' ');
+            let command = parts[0].toLowerCase();
+            let args = parts.slice(1).join(' ');
+
+            switch(command){
+                case 'debug64':
+                    $('#output').append('<div>' + uwuify('🔒 Secret Commands Menu:') + '</div>');
+                    let secretCommands = [
+                        'uwu - Toggle uwu text mode',
+                        'rainbow - Toggle rainbow text mode',
+                        'hack - Start a fake hacking sequence',
+                        'matrix - Display matrix-like animation',
+                        'rickroll - Never gonna give you up...',
+                        'coffee - Take a coffee break',
+                        'sl - What happens when you type ls wrong?',
+                        '42 - The answer to everything',
+                        'color [hex] - Change terminal color (e.g., color #ff0000)',
+                        'cowsay [message] - Make a cow say something'
+                    ];
+                    secretCommands.forEach(cmd => {
+                        $('#output').append('<div>' + uwuify(cmd) + '</div>');
+                    });
+                    break;
+                case 'help':
+                    $('#output').append('<div>' + uwuify('Available commands:') + '</div>');
+                    let helpText = [
+                        'help - List available commands',
+                        'about - Information about UniX',
+                        'echo [text] - Display a line of text',
+                        'clear - Clear the terminal screen',
+                        'date - Display current date and time',
+                        'changelog - View system updates and changes',
+                        '!! - Repeat the last command'
+                    ];
+                    helpText.forEach(text => {
+                        $('#output').append('<div>' + uwuify(text) + '</div>');
+                    });
+                    $('#output').append('<div>' + uwuify('Hint: There are hidden commands to discover!') + '</div>');
+                    break;
+                case 'changelog':
+                    $('#output').append('<div>' + uwuify('🔄 Changelog:') + '</div>');
+                    let changes = [
+                        'v1.0.1 - More Commands',
+                        'v1.0.0 - Initial Release'
+                    ];
+                    changes.forEach(change => {
+                        $('#output').append('<div>' + uwuify(change) + '</div>');
+                    });
+                    break;
+                case 'about':
+                    let aboutText = 'UniX is a powerful, customizable terminal emulator that offers a wide range of features for users of all levels. With its intuitive interface and simple controls, even beginners can quickly learn to navigate and execute commands. For experienced users, UniX provides a vast array of advanced features, including scripting capabilities, automation tools, and a wealth of hidden commands. Whether you\'re a casual user or a seasoned developer, UniX is a versatile tool that can enhance your computing experience.';
+                    $('#output').append('<div>' + uwuify(aboutText) + '</div>');
+                    break;
+                case 'echo':
+                    $('#output').append('<div>' + uwuify(args) + '</div>');
+                    break;
+                case 'clear':
+                    $('#output').html(`
+                        <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                            <text x="50%" y="50%" text-anchor="middle" fill="#00ffcc" font-size="40" font-family="Brush Script MT, cursive" dy=".3em">UX</text>
+                        </svg>
+                        <div id="welcome-message">Welcome to UniX Terminal. Type "help" to get started.</div>
+                    `);
+                    break;
+                case 'date':
+                    $('#output').append('<div>' + uwuify(new Date().toString()) + '</div>');
+                    break;
+                case '!!':
+                    if (window.lastCommand && window.lastCommand !== '!!') {
+                        processCommand(window.lastCommand);
+                    } else {
+                        $('#output').append('<div>' + uwuify('No previous command found!') + '</div>');
+                    }
+                    break;
+                case 'uwu':
+                    window.uwuMode = !window.uwuMode;
+                    $('#output').append('<div>' + uwuify(window.uwuMode ? 'UwU mode activated!' : 'UwU mode deactivated!') + '</div>');
+                    break;
+                case 'rainbow':
+                    window.rainbowMode = !window.rainbowMode;
+                    if(window.rainbowMode) {
+                        $('#output').addClass('rainbow-mode');
+                        $('#output').append('<div>🌈 Rainbow mode activated!</div>');
+                    } else {
+                        $('#output').removeClass('rainbow-mode');
+                        $('#output').append('<div>Rainbow mode deactivated!</div>');
+                    }
+                    break;
+                case 'hack':
+                    let hackingPhrases = [
+                        'Accessing mainframe...',
+                        'Bypassing security protocols...',
+                        'Decrypting files...',
+                        'Injecting code...',
+                        'Extracting data...',
+                        'Access granted! Just kidding, this is a fake hacking sequence 😉'
+                    ];
+                    let delay = 0;
+                    hackingPhrases.forEach(phrase => {
+                        setTimeout(() => {
+                            $('#output').append('<div>' + uwuify(phrase) + '</div>');
+                            $('#output').scrollTop($('#output')[0].scrollHeight);
+                        }, delay);
+                        delay += 1000;
+                    });
+                    break;
+                case 'matrix':
+                    $('#command-input').prop('disabled', true);
+                    const CONTAINER_HEIGHT = 300;
+                    const CHAR_SIZE = 20;
+                    $('#output').append('<div id="matrix-container" style="font-family: monospace; position: relative; height: ' + CONTAINER_HEIGHT + 'px; overflow: hidden; background: rgba(0,0,0,0.9);"></div>');
+                    $('#output').append('<div style="color: #0f0;">(Press Q to exit)</div>');
+                    class Particle {
+                        constructor(x, y) {
+                            this.x = x;
+                            this.y = y;
+                            this.char = Math.random() < 0.5 ? '0' : '1';
+                            this.speed = Math.random() * 2 + 1;
+                            this.opacity = 1;
+                            this.size = CHAR_SIZE;
+                        }
+                        update() {
+                            this.y += this.speed;
+                            this.x += (Math.random() - 0.5) * 2;
+                            this.opacity -= 0.02;
+                            this.size *= 0.95;
+                            return this.opacity > 0;
+                        }
+                        draw(container) {
+                            container.append(
+                                `<div style="position: absolute; left: ${this.x}px; top: ${this.y}px; ` +
+                                `font-size: ${this.size}px; opacity: ${this.opacity}; ` +
+                                `color: rgba(0, 255, 0, ${this.opacity});">${this.char}</div>`
+                            );
+                        }
+                    }
+                    class Raindrop {
+                        constructor(x) {
+                            this.x = x;
+                            this.y = -CHAR_SIZE;
+                            this.speed = Math.random() * 3 + 2;
+                            this.char = Math.random() < 0.5 ? '0' : '1';
+                        }
+                        update() {
+                            this.y += this.speed;
+                            return this.y < CONTAINER_HEIGHT;
+                        }
+                        draw(container) {
+                            container.append(
+                                `<div style="position: absolute; left: ${this.x}px; top: ${this.y}px; ` +
+                                `color: rgba(0, 255, 0, 0.8);">${this.char}</div>`
+                            );
+                        }
+                        createSplash() {
+                            let particles = [];
+                            for (let i = 0; i < 8; i++) {
+                                particles.push(new Particle(this.x, this.y));
+                            }
+                            return particles;
+                        }
+                    }
+                    let raindrops = [];
+                    let particles = [];
+                    let isRunning = true;
+                    const columns = Math.floor(window.innerWidth / CHAR_SIZE);
+                    $(document).on('keydown.matrix', function(e) {
+                        if (e.key.toLowerCase() === 'q') {
+                            isRunning = false;
+                            $('#matrix-container').remove();
+                            $('#command-input').prop('disabled', false);
+                            $(document).off('keydown.matrix');
+                            $('#output').append('<div>Matrix terminated.</div>');
+                            $('#output').scrollTop($('#output')[0].scrollHeight);
+                        }
+                    });
+                    let matrixInterval = setInterval(() => {
+                        if (!isRunning) {
+                            clearInterval(matrixInterval);
+                            return;
+                        }
+                        if (Math.random() < 0.2) {
+                            let x = Math.floor(Math.random() * columns) * CHAR_SIZE;
+                            raindrops.push(new Raindrop(x));
+                        }
+                        $('#matrix-container').empty();
+                        particles = particles.filter(particle => {
+                            const isAlive = particle.update();
+                            if (isAlive) particle.draw($('#matrix-container'));
+                            return isAlive;
+                        });
+                        raindrops = raindrops.filter(drop => {
+                            const isAlive = drop.update();
+                            if (isAlive) {
+                                drop.draw($('#matrix-container'));
+                            } else {
+                                particles.push(...drop.createSplash());
+                            }
+                            return isAlive;
+                        });
+                        $('#output').scrollTop($('#output')[0].scrollHeight);
+                    }, 50);
+                    break;
+                case 'coffee':
+                    $('#output').append('<div>☕ Taking a coffee break...</div>');
+                    const progressBar = $('<div class="coffee-progress"><div></div></div>');
+                    $('#output').append(progressBar);
+                    setTimeout(() => {
+                        progressBar.find('div').css('width', '100%');
+                        setTimeout(() => {
+                            $('#output').append('<div>☕ Your virtual coffee is ready! *sips*</div>');
+                            $('#output').append('<div>Feeling refreshed and ready to code!</div>');
+                        }, 3000);
+                    }, 100);
+                    break;
+                case 'sl':
+                    $('#command-input').prop('disabled', true);
+                    const trainArt = [
+                        '      ====        ________                ___________',
+                        '  _D _|  |_______/        \\__I_I_____===__|_________/',
+                        '   |(_)---  |   H\\________/ |   |        =|___ ___|',
+                        '   /     |  |   H  |  |     |   |         ||_| |_||',
+                        '  |      |  |   H  |__--------------------| [___] |',
+                        '  | ________|___H__/__|_____/[][]~\\_______|       |',
+                        '  |/ |   |-----------I_____I [][] []  D   |=======|',
+                        '__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|',
+                        ' |/-=|___|=    ||    ||    ||    |_____/~\\___/',
+                        '  \\_/      \\O=====O=====O=====O_/      \\_/'
+                    ];
+
+                    const smokeFrames = [' ', '.', 'o', 'O', '@', '*'];
+                    let position = window.innerWidth;
+                    let smokeIndex = 0;
+
+                    const trainContainer = $('<div id="train-container" style="font-family: monospace; white-space: pre; overflow: hidden; line-height: 1.2em; position: relative; background: rgba(0,0,0,0.8); padding: 10px;"></div>');
+                    $('#output').append(trainContainer);
+
+                    const trainInterval = setInterval(() => {
+                        trainContainer.empty();
+                        position -= 4;
+
+                        smokeIndex = (smokeIndex + 1) % smokeFrames.length;
+                        
+                        trainArt.forEach((line, index) => {
+                            let displayLine = line;
+                            if (index === 0) {
+                                let smokeTrail = '';
+                                for (let i = 0; i < 5; i++) {
+                                    smokeTrail += smokeFrames[(smokeIndex + i) % smokeFrames.length] + ' ';
+                                }
+                                displayLine = smokeTrail + line;
+                            }
+                            const div = $('<div>').text(' '.repeat(Math.max(0, Math.floor(position))) + displayLine);
+                            trainContainer.append(div);
+                        });
+
+                        if (position < -trainArt[0].length - 50) {
+                            clearInterval(trainInterval);
+                            $('#command-input').prop('disabled', false);
+                            trainContainer.remove();
+                            $('#output').append('<div>🚂 Choo choo!</div>');
+                            $('#output').scrollTop($('#output')[0].scrollHeight);
+                        }
+                        $('#output').scrollTop($('#output')[0].scrollHeight);
+                    }, 30);
+                    break;
+                case 'cowsay':
+                    let message = args || 'Moo!';
+                    let cowArt = 
+                    `    ${'-'.repeat(message.length + 2)}
+    < ${message} >
+    ${'-'.repeat(message.length + 2)}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~`;
+                    $('#output').append('<div style="white-space: pre-wrap;">' + uwuify(cowArt) + '</div>');
+                    break;
+                case '42':
+                    let answer = [
+                        'Calculating the answer to life, universe, and everything...',
+                        'Processing cosmic data...',
+                        'Consulting Deep Thought...',
+                        'The answer is: 42',
+                        'But do you know the question?'
+                    ];
+                    let delay42 = 0;
+                    answer.forEach(line => {
+                        setTimeout(() => {
+                            $('#output').append('<div>' + uwuify(line) + '</div>');
+                            $('#output').scrollTop($('#output')[0].scrollHeight);
+                        }, delay42);
+                        delay42 += 1000;
+                    });
+                    break;
+                case 'color':
+                    let color = args.trim();
+                    if (/^#[0-9A-Fa-f]{6}$/.test(color)) {
+                        $('body').css('color', color);
+                        $('#output').append('<div>Terminal color changed to ' + color + '</div>');
+                    } else {
+                        $('#output').append('<div>Please provide a valid hex color code (e.g., #00ff00)</div>');
+                    }
+                    break;
+                case 'rickroll':
+                    let lyrics = [
+                        "🎵 Never gonna give you up",
+                        "🎵 Never gonna let you down",
+                        "🎵 Never gonna run around and desert you",
+                    ];
+                    lyrics.forEach((line, index) => {
+                        setTimeout(() => {
+                            $('#output').append('<div>' + line + '</div>');
+                            $('#output').scrollTop($('#output')[0].scrollHeight);
+                        }, index * 1000);
+                    });
+                    break;
+                default:
+                    $('#output').append('<div>' + uwuify('Command not found: ' + cmd) + '</div>');
+            }
+        }
+    });
+    </script>
+</body></html>
